@@ -1,0 +1,40 @@
+{{> header}}
+{{#edit}}
+<form action="/post/{{post.id}}/edit" method="post">
+{{/edit}}
+{{^edit}}
+<form action="/post/edit" method="post">
+{{/edit}}
+    <div class="form-group">
+    <label for="title">title</label>
+    <input type="text" class="form-control" id="title" name="title">
+  </div>
+  <div class="form-group">
+    <label>content</label>
+    <div id="content"></div>
+  </div>
+  <textarea name="content" id="real" hidden></textarea>
+   <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script src="https://unpkg.com/pell"></script>
+<script>
+  const real = document.getElementById('real')
+  const editor = pell.init({
+    element: document.getElementById('content'),
+    onChange: html => {
+      real.innerHTML = html
+    },
+    actions: ['bold', 'italic', 'heading2', 'code', 'olist', 'ulist'],
+    classes: {
+      content: 'pell-content pell-c',
+      selected: 'pell-button-selected'
+    }
+  })
+  {{#edit}}
+  editor.content.innerHTML = '{{{post.content}}}'
+  real.innerHTML = '{{{post.content}}}'
+  document.getElementById('title').value = "{{post.title}}"
+  {{/edit}}
+</script>
+{{> footer}}

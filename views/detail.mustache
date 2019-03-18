@@ -1,0 +1,22 @@
+{{> header}}
+<div>
+    {{#post}}
+    <div style="border-bottom: 1px solid #e5e5e5; " class="my-3">
+        <h2>{{title}}</h2>
+        <p>{{{content}}}</p>
+    </div>
+    {{/post}}
+</div>
+{{#login}}
+<div class="btn-group" role="group">
+        <a class="btn btn-success" href="/post/{{post.id}}/edit">
+        edit
+    </a>
+    <form method="post" action="/post/{{post.id}}/delete">
+        <input type="submit" value="delete" class="btn btn-danger"/>
+    </form>
+    
+    </div>
+
+{{/login}}
+{{> footer}}

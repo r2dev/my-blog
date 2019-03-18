@@ -1,0 +1,10 @@
+{{> header}}
+<div>
+    {{#post}}
+    <div class="my-3" style="border-bottom: 1px solid #e5e5e5; ">
+        <h2><a href="/post/{{id}}">{{title}}</a></h2>
+        <p>{{{content}}}</p>
+    </div>
+    {{/post}}
+</div>
+{{> footer}}

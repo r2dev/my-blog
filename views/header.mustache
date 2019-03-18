@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            .pell-c {
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: .25rem;
+                padding: .375rem .75rem;
+            }
+            .pell-c:focus {
+                border-color: #80bdff;
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header class="py-3" style="border-bottom: 1px solid #e5e5e5;">
+                <div class="row flex-nowrap justify-content-between align-items-center">
+                    <div class="col-6">
+                        <a href="/" class="text-dark" style="font-size: 2.25rem">k0dede</a>
+                    </div>
+                    {{#login}}
+                    <div class="col-6 text-right">
+                        <a class="btn btn-outline-secondary" href="/auth/logout">logout</a>
+                        <a class="btn btn-outline-secondary" href="/post/edit">post</a>
+                    </div>
+                    {{/login}}
+                    {{^login}}
+                    <div class="col-6 text-right">
+                        <a class="btn btn-outline-secondary" href="/auth/login">login</a>
+                        {{! <a class="btn btn-outline-secondary" href="/auth/register">register</a> }}
+                    </div>
+                    {{/login}}
+                </div>
+            </header>
+        </div>
+        <main class="container">
+

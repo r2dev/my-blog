@@ -1,0 +1,32 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "knex": "knex"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.0",
+    "knex": "^0.16.3",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-passport": "^4.1.1",
+    "koa-rewrite": "^3.0.1",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.10.1",
+    "koa-views": "^6.1.5",
+    "mustache": "^3.0.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10",
+    "sqlite3": "^4.0.6"
+  }
+}
