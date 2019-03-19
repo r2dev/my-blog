@@ -9,12 +9,7 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const knex = require("knex")({
-  client: "sqlite3",
-  connection: {
-    filename: "./dev.sqlite3"
-  }
-});
+
 const rewrite = require("koa-rewrite");
 const views = require("koa-views");
 
@@ -22,9 +17,9 @@ const session = require("koa-session");
 
 const bodyParser = require("koa-bodyparser");
 const config = require("./config.js");
-
+const knex = require("knex")(config.database);
 // sessions
-app.keys = ["super-secret-key"];
+app.keys = config.keys;
 app.use(rewrite("/", config.rewrite_url));
 app.use(session(app));
 
@@ -71,7 +66,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "jwt-secret"
+      secretOrKey: config.jwt_key
     },
     (jwtPayload, done) => {
       knex("user")
@@ -187,7 +182,7 @@ router
       const post = await knex("post").where({ author: currentUser.id });
       const temp = post.map(p => ({
         ...p,
-        content: p.content.substring(0, 400)
+        content: p.content
       }));
       await ctx.render("post.mustache", {
         post: temp,
@@ -294,7 +289,7 @@ router
             title: ctx.request.body.title,
             content: ctx.request.body.content
           });
-        ctx.redirect(`/post/${ctx.params.id}`)
+        ctx.redirect(`/post/${ctx.params.id}`);
       } else {
         ctx.status = 401;
       }
