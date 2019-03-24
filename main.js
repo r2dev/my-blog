@@ -179,7 +179,7 @@ router
   .get("/user/current", async ctx => {
     if (ctx.isAuthenticated()) {
       const currentUser = ctx.state.user;
-      const post = await knex("post").where({ author: currentUser.id });
+      const post = await knex("post").where({ author: currentUser.id }).orderBy('id', 'desc');
       const temp = post.map(p => ({
         ...p,
         content: p.content
@@ -199,7 +199,7 @@ router
     if (ctx.isAuthenticated() && user.id === ctx.state.user.id) {
       ctx.redirect("/user/current");
     } else {
-      const post = await knex("post").where({ author: ctx.params.id });
+      const post = await knex("post").where({ author: ctx.params.id }).orderBy('id', 'desc');
       const temp = post.map(p => ({
         ...p,
         content: p.content.substring(0, 400)
